@@ -12,6 +12,10 @@
         }
         body{
             background-color: black;
+            background-image: url('https://media.tenor.com/iINVhPik5WUAAAAC/night-sky-stars.gif');
+            background-repeat: no-repeat;
+            background-size: cover;
+           
         }
         div {
             /* border: 2px solid green; */
@@ -95,19 +99,21 @@
     <div class="button">
         <button onclick="calcWeight()" id="button">Calculate Weight</button>
     </div>
+    <div id="data_Container">
+        
+    </div>
 </body>
 <script>
     const planets = [
-        { planetName: "Sun", gravity: 27.9, image: "geekster.jfif" },
-        { planetName: "Moon", gravity: 0.1655, image: "https://spaceplace.nasa.gov/gallery-sun/en/solar-flare.en.jpg" },
-        { planetName: "Mercury", gravity: 0.377, image: "https://spaceplace.nasa.gov/gallery-sun/en/solar-flare.en.jpg" },
-        { planetName: "Venus", gravity: 0.9032, image: "https://spaceplace.nasa.gov/gallery-sun/en/solar-flare.en.jpg" },
-        { planetName: "Earth", gravity: 1, image: "https://cdn.pixabay.com/photo/2011/12/13/14/31/earth-11015__340.jpg" },
-        { planetName: "Mars", gravity: 0.3895, image: "https://spaceplace.nasa.gov/gallery-sun/en/solar-flare.en.jpg" },
-        { planetName: "Jupiter", gravity: 2.640, image: "https://spaceplace.nasa.gov/gallery-sun/en/solar-flare.en.jpg" },
-        { planetName: "Saturn", gravity: 1.139, image: "https://spaceplace.nasa.gov/gallery-sun/en/solar-flare.en.jpg" },
-        { planetName: "Uranus", gravity: 0.917, image: "https://spaceplace.nasa.gov/gallery-sun/en/solar-flare.en.jpg" },
-        { planetName: "Neptune", gravity: 1.148, image: "https://spaceplace.nasa.gov/gallery-sun/en/solar-flare.en.jpg" },
+        { planetName: "Moon", gravity: 0.1655, image: "images/moon.png" },
+        { planetName: "Mercury", gravity: 0.377, image: "images/mercury.png" },
+        { planetName: "Venus", gravity: 0.9032, image: "images/venus.png" },
+        { planetName: "Earth", gravity: 1, image: "images/earth.png" },
+        { planetName: "Mars", gravity: 0.3895, image: "images/mars.png" },
+        { planetName: "Jupiter", gravity: 2.640, image: "images/jupiter.png" },
+        { planetName: "Saturn", gravity: 1.139, image: "images/saturn.png" },
+        { planetName: "Uranus", gravity: 0.917, image: "images/uranus.png" },
+        { planetName: "Neptune", gravity: 1.148, image: "images/neptune.png" }
     ]
 
     planets.map((ele) => {
@@ -126,7 +132,12 @@
         // console.log(select);
     })
 
+    const box = document.getElementById("data_Container");
+
     function calcWeight() {
+
+        box.innerHTML = "";
+
         var mass = +document.getElementById("inputWeight").value
         console.log(mass);
         const select = document.getElementById("selectPlanet")
@@ -141,31 +152,36 @@
 
         const weight = mass * gravity
         console.log(weight);
-        const box = document.createElement("div");
+
         //console.log(box);
-        box.setAttribute("style","border:2px solid red;height:450px;")
+        box.style.height="450px";
         const heading = document.createElement("h1");
         //console.log(heading);
         heading.createnodeText = "Enter your mass";
         box.appendChild(heading);
         const img = document.createElement("img")
         img.setAttribute("id","image");
-        box.appendChild(img);
+        
         document.body.appendChild(box);
-        if (mass == "") {
+        if (mass == "") 
+        {
             heading.innerText = "Enter your mass";
-        } else if (mass <= 0) {
+        } 
+        else if (mass <= 0) 
+        {
             heading.innerText = "plz enter mass greater than 0"
-        } else {
-            heading.innerText = Math.abs(weight)
+        } 
+        else {
+            heading.innerText = Math.abs(weight.toFixed(2));
              var imgsrc = selectedOption.getAttribute("imageSrc")
-            // const img = document.getElementById("image")
-            // img.src = imgsrc
+             console.log(imgsrc);
             img.setAttribute("src",imgsrc);
             img.style.height="150px";
+            box.appendChild(img);
+            console.log(box);
         }
-    }
 
+    }
 </script>
 
 </html>
